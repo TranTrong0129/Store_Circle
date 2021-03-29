@@ -1,6 +1,6 @@
 # Store_Circle
 
-## Hướng dẫn chạy
+## Hướng dẫn chạy chương trình StoreCirle
 
 1. Trước khi chạy cần phải chạy DB (file cippo.sql)  trước trên 1 server nào đấy, SQLserver, mySql, ... (ở đây trương trình chạy Mysql)
 2. Sau khi B1 xong có 2 cách để demo chương trình (nếu trong trường hợp c1 chạy không được do cấu hình máy không phù hợp thì chạy c2)
