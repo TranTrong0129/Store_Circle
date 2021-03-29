@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="CIPO_app.Tooltip"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:CIPO_app"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="300">
+    <Grid>
+        <Border BorderBrush="GreenYellow" BorderThickness="3" Margin="5 5 5 50" CornerRadius="5">
+            <StackPanel Background="Wheat">
+                <Label HorizontalAlignment="Center" FontSize="20" FontWeight="ExtraBold" Foreground="BlueViolet" 
+                       Margin="0 0 0 20"
+                       HorizontalContentAlignment="Center">Thông tin nhanh </Label>
+                <Label FontWeight="ExtraBlack" Margin="5" FontSize="13">Tên Sản Phẩm:</Label>
+                <TextBox x:Name="Ten" Text="{Binding Tensp}" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+
+                <Label FontWeight="ExtraBlack" Margin="5" FontSize="13">Số Lượng:</Label>
+                <TextBox x:Name="soluong" Text="{Binding Soluong}" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+
+                <Label FontWeight="ExtraBlack" Margin="5" FontSize="13">Giá:</Label>
+                <TextBox x:Name="Gia"  Text="{Binding gia}" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+
+                <Label FontWeight="ExtraBlack" Margin="5"  FontSize="13">Loại sản phẩm</Label>
+                <ComboBox Name="loaisp" materialDesign:HintAssist.Hint="Loại sản phẩm" HorizontalContentAlignment="Center">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding id}" Margin="2 0 10 0" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding tenloai}" FontWeight="Bold"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Label FontWeight="ExtraBlack" Margin="5" FontSize="13">Nhà sản xuất</Label>
+                <ComboBox Name="NhaSX" materialDesign:HintAssist.Hint="Nhà sản xuất" HorizontalContentAlignment="Center" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding id}" Margin="2 0 10 0" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding tennhasx}" FontWeight="Bold" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Label FontWeight="ExtraBlack" Margin="5" FontSize="13">Điểm đánh giá</Label>
+                <ComboBox Name="diemdgsp" materialDesign:HintAssist.Hint="Điểm đánh giá" HorizontalContentAlignment="Center" FontWeight="Bold" >
+                    <ComboBoxItem HorizontalContentAlignment="Center" FontWeight="Bold">
+                        1
+                    </ComboBoxItem>
+                    <ComboBoxItem HorizontalContentAlignment="Center" FontWeight="Bold">
+                        2
+                    </ComboBoxItem>
+                    <ComboBoxItem HorizontalContentAlignment="Center" FontWeight="Bold">
+                        3
+                    </ComboBoxItem>
+                    <ComboBoxItem HorizontalContentAlignment="Center" FontWeight="Bold">
+                        4
+                    </ComboBoxItem>
+                    <ComboBoxItem HorizontalContentAlignment="Center" FontWeight="Bold">
+                        5
+                    </ComboBoxItem>
+                </ComboBox>
+
+            </StackPanel>
+        </Border>
+        <Button Name="tooltip" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5 5 5 10" Click="Event_button" Content="Thao tác" Width="100"/>
+    </Grid>
+</UserControl>

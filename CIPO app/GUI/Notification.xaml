@@ -1,0 +1,75 @@
+﻿<Window x:Class="CIPO_app.Notification"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:CIPO_app"
+        mc:Ignorable="d"
+        Title="Notification" Height="600" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation From="0" To="1" Duration="0:0:1" Storyboard.TargetProperty="Opacity"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    <Window.Resources>
+        <local:RelativeToAbsolutePathConverter x:Key="converter" />
+    </Window.Resources>
+        
+    <Grid>
+        <Rectangle RadiusY="30" RadiusX="30">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="../Images/background.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <TextBlock Panel.ZIndex="2" Padding="5" 
+            Name="MyWipedText" FontSize="20" FontWeight="Bold" Foreground="Orange" Width="380" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin=" 0 10 20 30" FontFamily="Comic Sans MS, Verdana">
+                 Sale!!! nhanh tay lên nào 
+            <!-- Animates the text block's width. -->
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="MyWipedText" 
+                                Storyboard.TargetProperty="(TextBlock.Width)" To="250" Duration="0:0:5" 
+                                AutoReverse="True" RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <ProgressBar Background="White" Name="valueloading"
+                VerticalAlignment="Bottom"
+                Height="15" Margin="25 0 25 5" />
+                <Button x:Name="step" Click="step_Click"
+                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                ToolTip="Bỏ Qua" Margin="268,532,684,20"> 
+            <materialDesign:PackIcon Kind="Play" />
+        </Button>
+        <CheckBox Name="Check" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,10" Content="don't show this box" Width="190" Foreground="White" FontWeight="Bold" Checked="Check_Click"/>
+        <StackPanel Width="300" HorizontalAlignment="Right" Margin="0,220,60,65">
+            <TextBlock Text="{Binding Tensp}" FontSize="20" FontWeight="DemiBold" FontFamily="Comic Sans MS, Verdana"/>
+            <Grid Height="200" Width="200">
+                <Grid.Background>
+                    <ImageBrush ImageSource="{Binding Anhdaidien, Converter={StaticResource converter}}"/>
+                </Grid.Background>
+                <Image Height="90" Width="90" Source="../Images/sale.jpg" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            </Grid>
+            <DockPanel>
+                <TextBlock Text="{Binding gia}" FontSize="15" FontWeight="ExtraBold" Margin="4" Foreground="PaleVioletRed"/>
+                <Label FontSize="15" FontWeight="ExtraBold" Foreground="Green" Content="USD (giá gốc)" />
+            </DockPanel>
+            
+            <DockPanel>
+                <TextBlock x:Name="cost" FontSize="15" FontWeight="ExtraBold" Margin="4" Foreground="PaleVioletRed"/>
+                <Label FontSize="15" FontWeight="ExtraBold" Foreground="Green" Content="USD (giảm giá)"/>
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</Window>

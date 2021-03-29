@@ -1,0 +1,212 @@
+﻿<UserControl x:Class="CIPO_app.Home"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:CIPO_app"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="1200">
+    <UserControl.Resources>
+        <local:RelativeToAbsolutePathConverter x:Key="converter" />
+    </UserControl.Resources>
+    <Grid Background="#404751">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <DockPanel Margin="5" HorizontalAlignment="Center">
+                    <Border BorderBrush="AliceBlue" BorderThickness="1" CornerRadius="10" Padding="2">
+                        <TextBox
+                            x:Name="Search"
+                            TextChanged="Search_TextChanged"
+                            Foreground="Black"
+                            materialDesign:HintAssist.Hint="Searching"
+                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                            BorderThickness="0"
+                            MinWidth="400"
+                            Background="White"
+                            />
+                    </Border>
+
+                    <materialDesign:PopupBox
+                        PlacementMode="BottomAndAlignCentres">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon Kind="FilterMenuOutline" Foreground="White"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <ListBox Name="DataLoai" SelectionChanged="DataLoai_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,2">
+                                        <Label Content="{Binding tenloai}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </materialDesign:PopupBox>
+                </DockPanel>
+                <DockPanel LastChildFill="True" Margin="0 10 0 0" >
+                    <Button x:Name="All_Data" Background="Transparent" BorderThickness="0" Click="Home_Click">
+                        <materialDesign:PackIcon Kind="Bookshelf" />
+                    </Button>
+
+                    <Button Background="Transparent" BorderThickness="0" Tag="1" Click="Type_Click">
+                        <materialDesign:PackIcon Kind="Food" />
+                    </Button>
+
+                    <Button Background="Transparent" BorderThickness="0" Click="Type_Click" Tag="2" >
+                        <materialDesign:PackIcon Kind="BreadSlice" />
+                    </Button>
+
+                    <Button Background="Transparent" BorderThickness="0" Click="Type_Click" Tag="3">
+                        <materialDesign:PackIcon Kind="FastFood" />
+                    </Button>
+
+                    <Button Background="Transparent" BorderThickness="0" Click="Type_Click" Tag="4">
+                        <materialDesign:PackIcon Kind="CupWater" />
+                    </Button>
+
+                    <Button Background="Transparent" BorderThickness="0" Click="Type_Click" Tag="5">
+                        <materialDesign:PackIcon Kind="FoodApple" />
+                    </Button>
+
+                    <Button Background="Transparent" BorderThickness="0" Click="Type_Click" Tag="6">
+                        <materialDesign:PackIcon Kind="SetLeft" />
+                    </Button>
+                    
+                    <Grid>
+                        <TextBlock x:Name="Header" FontFamily="Comic Sans MS" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="20" Foreground="White"/>
+                    </Grid>
+                </DockPanel>
+            </StackPanel>
+
+            <ListView  Grid.Row="1" Margin="5" Name="Data" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <Grid Width="220" Height="220" Margin="10" MouseLeftButtonDown="Data_MouseLeftButtonDown">
+                            <Grid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Update" Click="Event_click"/>
+                                    <MenuItem Header="Delete" Click="Event_click"/>
+                                </ContextMenu>
+                            </Grid.ContextMenu>
+  
+                            <Border CornerRadius="5" ToolTip="{Binding Tensp}">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding Anhdaidien, Converter={StaticResource converter}}" Stretch="Fill"/>
+                                </Border.Background>
+                            </Border>
+
+                            <StackPanel>
+
+                                <Canvas>
+                                    <Border CornerRadius="5" Opacity="1" Margin="5" Background="Black" Canvas.Left="2">
+                                        <TextBlock Margin="3" Text="{Binding gia, StringFormat=Giá: {0:c}}" 
+                                                   Name="cost" Foreground="Wheat"
+                                                   FontSize="13" FontWeight="DemiBold" 
+                                                   FontStyle="Oblique"/>
+                                        
+                                    </Border>
+                                    <Border CornerRadius="10" Opacity="1" Margin="5" Background="Black"  Canvas.Right="2">
+                                        <TextBlock Margin="3" Text="{Binding Soluong, StringFormat=Số lượng: {0:#}}"
+                                                   Name="soluong" Foreground="Wheat" 
+                                                   FontSize="13" FontWeight="DemiBold" 
+                                                   FontStyle="Oblique"/>
+                                    </Border>
+                                </Canvas>
+                                                              
+                                <Border CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 30 0 0 ">
+                                    <materialDesign:RatingBar Foreground="Snow"
+                                         Value="{Binding Danhgiasao}"
+                                         IsReadOnly="True"
+                                         x:Name="ReadOnlyRatingBar" >
+                                        <materialDesign:RatingBar.ValueItemTemplate>
+                                            <DataTemplate
+                                                DataType="system:Int32">
+                                                <Grid>
+                                                    <materialDesign:PackIcon
+                                                        Kind="Heart"
+                                                        Foreground="BlueViolet"
+                                                        Height="15"
+                                                        Width="15" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </materialDesign:RatingBar.ValueItemTemplate>
+                                    </materialDesign:RatingBar>
+                                </Border>
+                                
+                            </StackPanel>
+
+                            <Border CornerRadius="5" Opacity="1" Margin="2" Background="Black" VerticalAlignment="Bottom">
+                                <TextBlock Margin="5" Text="{Binding Tensp}" 
+                                           Foreground="White" 
+                                           TextWrapping="Wrap" 
+                                           MaxWidth="130" 
+                                           FontSize="13" 
+                                           FontWeight="ExtraBold"
+                                           TextAlignment="Center"/>
+                            </Border>
+
+                            <Label  FontWeight="Medium" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="30" MouseLeftButtonDown="addBooking" ToolTip="Thêm vào giỏ hàng">
+                                <Label.Content>
+                                    <materialDesign:PackIcon Kind="CartAdd"/>
+                                </Label.Content>
+                                <Label.Style>
+                                    <Style TargetType="Label">
+                                        <Setter Property="Foreground" Value="Wheat"/>
+                                        <Setter Property="Opacity" Value="0.7"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Foreground" Value="Yellow"/>
+                                                <Setter Property="Opacity" Value="5"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <StackPanel Grid.Column="1">
+            <DockPanel>
+                <materialDesign:Chip Background="Olive"
+                    Content="ADMIN" Grid.Column="1" VerticalAlignment="Center" Margin="5">
+                    <materialDesign:Chip.Icon>
+                        <Image Source="../Images/Shutdown.png"/>
+                    </materialDesign:Chip.Icon>
+                </materialDesign:Chip>
+                <Canvas HorizontalAlignment="Right" Width="50">
+                    <Button  Background="Transparent" BorderThickness="0" Name="Cart" Click="Cart_Click" Canvas.Left="10">
+                        <materialDesign:PackIcon Kind="Cart" ToolTip="Cart"/>
+                    </Button>
+                    <Label Content="0" Height="27" Width="23" FontWeight="DemiBold" Foreground="Red" Canvas.Left="35" Canvas.Top="-4" Name="NumberOder" FontSize="10"/>
+                </Canvas>
+            </DockPanel>
+            <Border Height="100" Background="#535e66" CornerRadius="5" VerticalAlignment="Center">
+                <Grid>
+                    <Label Content="Chi Tiết Sản Phẩm" Foreground="White" FontSize="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="DemiBold"/>
+                    <TextBlock x:Name="clock" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                </Grid>
+            </Border>
+            <UserControl Margin="0 10 0 0" Height="550" Name="screenshow" Content="{Binding}"/>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>

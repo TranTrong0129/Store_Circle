@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="CIPO_app.Cart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:CIPO_app"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1200">
+    <Grid Background="Azure">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="Turquoise">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Label Content="Thanh toán" Foreground="Black" FontSize="40" HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center" FontWeight="ExtraBlack" Margin="0 30 0 0"
+                   VerticalAlignment="Top"/>
+
+            <Border VerticalAlignment="Bottom" Height="30" Margin="0 0 0 20" BorderThickness="2" 
+                    BorderBrush="Black" CornerRadius="10" Width="320">
+                <Grid  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{DynamicResource MaterialDesignToolButton}">
+                        <materialDesign:PackIcon Kind="Magnify" Opacity="0.56" />
+                    </Button>
+
+                    <TextBox Grid.Column="1" Margin="8 0 0 0"
+                        materialDesign:HintAssist.Hint="Search for order"
+                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                        BorderThickness="0"
+                        MinWidth="180"
+                        Foreground="Black"
+                        VerticalAlignment="Center" />
+
+                    <Button Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="2">
+                        <materialDesign:PackIcon Kind="Microphone" Opacity=".56" Margin="8 0 0 0" />
+                    </Button>
+
+                </Grid>
+            </Border>
+
+            <Border MinHeight="250" Grid.Row="1" Name="listBooks"/>
+
+            <Button Grid.Row="2" HorizontalAlignment="Center" Width="150" Background="OrangeRed" VerticalAlignment="Stretch" Margin="5" Click="PrintBill_Click" Name="thanhtoan">Xuất hóa đơn</Button>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <UserControl Name="screenbill" Content="{Binding}"/>
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <UserControl Name="savebill" Content="{Binding}"/>
+        </Grid>
+    </Grid>
+</UserControl>

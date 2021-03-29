@@ -1,0 +1,84 @@
+﻿<Window x:Class="CIPO_app.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:CIPO_app"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1270" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        Icon="../Images/shop.jpg"
+        AllowsTransparency="True" Background="#404751" Loaded="Window_Loaded">
+    <materialDesign:DrawerHost
+        BorderBrush="{DynamicResource MaterialDesignDivider}">
+        <materialDesign:DrawerHost.Style>
+            <Style
+                TargetType="materialDesign:DrawerHost"
+                BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
+            </Style>
+        </materialDesign:DrawerHost.Style>
+        <materialDesign:DrawerHost.LeftDrawerContent>
+            <StackPanel Margin="16">
+                <TextBlock Margin="4" HorizontalAlignment="Center">
+                    MENU
+                </TextBlock>
+                <Button Click="HOME_MENU"
+                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Left}"
+                        Margin="4"
+                        HorizontalAlignment="Center"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
+                    Home
+                </Button>
+                <Button Click="ADD_MENU"
+                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                        Margin="4"
+                        HorizontalAlignment="Center"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
+                    Add
+                </Button>
+            </StackPanel>
+        </materialDesign:DrawerHost.LeftDrawerContent>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Button x:Name="Button" Width="30" Height="30" BorderThickness="0" Click="Button_Click" Margin="10" VerticalAlignment="Bottom"  />
+
+                <StackPanel Margin="0,0,0,45">
+                    <Button Background="Transparent" BorderThickness="0"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Left}">
+                        <materialDesign:PackIcon Kind="MenuOpen" />
+                    </Button>
+                    <Button Background="Transparent" BorderThickness="0" Name="Home" Click="Home_Click">
+                        <materialDesign:PackIcon Kind="Home" />
+                    </Button>
+                    <Button Background="Transparent" BorderThickness="0" Name="Cart" Click="Cart_Click">
+                        <materialDesign:PackIcon Kind="Cart" />
+                    </Button>
+                    <Button Background="Transparent" BorderThickness="0" Name="Create" Click="Create_Click">
+                        <materialDesign:PackIcon Kind="DatabaseEdit"/>
+                    </Button>
+                    <Button Background="Transparent" BorderThickness="0" Name="Chart" Click="Chart_Click">
+                        <materialDesign:PackIcon Kind="ChartBar" />
+                    </Button>
+                    <Button Background="Transparent" BorderThickness="0" Name="setting" Click="setting_Click">
+                        <materialDesign:PackIcon Kind="Settings" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="0">
+                <UserControl Name="screen" Content="{Binding}"/>
+            </Grid>
+        </Grid>
+    </materialDesign:DrawerHost>
+
+</Window>
+
