@@ -2,7 +2,7 @@
 
 ## Hướng dẫn chạy
 
-1. Trước khi chạy cần phải chạy DB trước trên 1 server nào đấy, SQLserver, mySql, ... (ở đây trương trình chạy Mysql)
+1. Trước khi chạy cần phải chạy DB (file cippo.sql)  trước trên 1 server nào đấy, SQLserver, mySql, ... (ở đây trương trình chạy Mysql)
 2. Sau khi B1 xong có 2 cách để demo chương trình (nếu trong trường hợp C1 chạy không được do cấu hình mày không phù hợp thì chạy c2)
 3. Cách 1:
     - vào thư mục  StoreCirle/Debug(Release). tại đây sẽ có file đuôi .exe, ta chạy cài đặt và chờ đợi 
